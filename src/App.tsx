@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Toaster } from './components/ui/sonner';
@@ -8,15 +8,23 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import About from './components/About';
 import Workflow from './components/Workflow';
-import Gallery from './components/Gallery';
-import Products from './components/Products';
-import ExportMarkets from './components/ExportMarkets';
-import WhyChooseUs from './components/WhyChooseUs';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import FloatingElements from './components/FloatingElements';
 import './styles/globals.css';
+
+// Lazy load heavy components
+const Gallery = lazy(() => import('./components/Gallery').then(m => ({ default: m.Gallery })));
+const Products = lazy(() => import('./components/Products'));
+const ExportMarkets = lazy(() => import('./components/ExportMarkets'));
+const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+
+const LazySection = ({ children }: { children: React.ReactNode }) => (
+  <Suspense fallback={<div className="h-96" />}>
+    {children}
+  </Suspense>
+);
 
 export default function App() {
   return (
@@ -29,14 +37,14 @@ export default function App() {
             <Features />
             <About />
             <Workflow />
-            <Gallery />
-            <Products />
-            <ExportMarkets />
-            <WhyChooseUs />
-            <Testimonials />
-            <Contact />
+            <LazySection><Gallery /></LazySection>
+            <LazySection><Products /></LazySection>
+            <LazySection><ExportMarkets /></LazySection>
+            <LazySection><WhyChooseUs /></LazySection>
+            <LazySection><Testimonials /></LazySection>
+            <LazySection><Contact /></LazySection>
+            <LazySection><Footer /></LazySection>
           </main>
-          <Footer />
           <FloatingElements />
           <Toaster position="top-right" />
         </div>

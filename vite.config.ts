@@ -52,6 +52,22 @@
     build: {
       target: 'esnext',
       outDir: 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': ['react', 'react-dom'],
+            'radix': ['@radix-ui/react-accordion', '@radix-ui/react-alert-dialog', '@radix-ui/react-tabs'],
+            'charts': ['recharts'],
+            'ui-kit': ['lucide-react', 'sonner', 'next-themes'],
+          },
+        },
+      },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
     },
     server: {
       port: 3000,

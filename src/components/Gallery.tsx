@@ -1,215 +1,290 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ZoomIn } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
+import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import { Button } from './ui/button';
 import { useLanguage } from '../contexts/LanguageContext';
-import { Section, Container, SectionHeader } from './Section';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import Masonry from 'react-responsive-masonry';
 
-// Import images from src/assets/images
+// Import images
 import knittingImg from '../assets/images/Knitting.jpeg';
 import dyeingImg from '../assets/images/Dyeing.jpeg';
 import cuttingImg from '../assets/images/Cutting.jpeg';
 import stitchingImg from '../assets/images/Sttiching Unit.jpg';
-import finishingImg from '../assets/images/Quality Control.jpeg';
+import qualityImg from '../assets/images/Quality Control.jpeg';
 import packingImg from '../assets/images/Packing.jpeg';
-import exteriorImg from '../assets/images/Factory Building.jpg';
-import teamImg from '../assets/images/Material selection.jpeg';
+import factoryImg from '../assets/images/Factory Building.jpg';
+import factoryImg1 from '../assets/images/Factory Building_1.jpg';
 
-interface GalleryImage {
-  id: number;
-  src: string;
-  alt: string;
-  category: string;
-}
-
-const Gallery: React.FC = () => {
+export function Gallery() {
   const { t } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: t('gallery.filter.all') },
-    { id: 'knitting', label: t('gallery.filter.knitting') },
-    { id: 'dyeing', label: t('gallery.filter.dyeing') },
-    { id: 'cutting', label: t('gallery.filter.cutting') },
-    { id: 'stitching', label: t('gallery.filter.stitching') },
-    { id: 'finishing', label: t('gallery.filter.finishing') },
-    { id: 'packing', label: t('gallery.filter.packing') },
-    { id: 'exterior', label: t('gallery.filter.exterior') },
+    { id: 'all', name: 'All Departments' },
+    { id: 'knitting', name: 'Knitting' },
+    { id: 'dyeing', name: 'Dyeing' },
+    { id: 'cutting', name: 'Cutting' },
+    { id: 'stitching', name: 'Stitching' },
+    { id: 'finishing', name: 'Finishing' },
+    { id: 'packing', name: 'Packing' },
+    { id: 'factory', name: 'Factory & Workers' },
   ];
 
-  const images: GalleryImage[] = [
+  const images = [
     {
-      id: 1,
-      src: knittingImg,
-      alt: 'Knitting Department',
+      url: knittingImg,
       category: 'knitting',
+      title: 'Knitting Department',
+      description: 'Advanced knitting machinery',
+      type: 'image',
     },
     {
-      id: 2,
-      src: dyeingImg,
-      alt: 'Dyeing Process',
+      url: dyeingImg,
       category: 'dyeing',
+      title: 'Dyeing Department',
+      description: 'State-of-the-art dyeing facility',
+      type: 'image',
     },
     {
-      id: 3,
-      src: cuttingImg,
-      alt: 'Cutting Department',
+      url: cuttingImg,
       category: 'cutting',
+      title: 'Cutting Department',
+      description: 'Precision cutting technology',
+      type: 'image',
     },
     {
-      id: 4,
-      src: stitchingImg,
-      alt: 'Stitching Section',
+      url: stitchingImg,
       category: 'stitching',
+      title: 'Stitching Department',
+      description: 'Expert stitching workstations',
+      type: 'image',
     },
     {
-      id: 5,
-      src: finishingImg,
-      alt: 'Finishing & Quality Control',
+      url: qualityImg,
       category: 'finishing',
+      title: 'Finishing & Quality Control',
+      description: 'Quality control and finishing process',
+      type: 'image',
     },
     {
-      id: 6,
-      src: packingImg,
-      alt: 'Packing & Warehouse',
+      url: packingImg,
       category: 'packing',
+      title: 'Packing Department',
+      description: 'Professional packaging facility',
+      type: 'image',
     },
     {
-      id: 7,
-      src: exteriorImg,
-      alt: 'Factory Exterior',
-      category: 'exterior',
+      url: factoryImg,
+      category: 'factory',
+      title: 'Factory Exterior',
+      description: 'Our modern manufacturing facility',
+      type: 'image',
     },
- 
+    {
+      url: factoryImg1,
+      category: 'factory',
+      title: 'Material Selection',
+      description: 'Premium quality material selection',
+      type: 'image',
+    },
   ];
 
-  const filteredImages = selectedCategory === 'all'
-    ? images
-    : images.filter(img => img.category === selectedCategory);
+  const filteredImages = activeCategory === 'all' 
+    ? images 
+    : images.filter(img => img.category === activeCategory);
+
+  const nextImage = () => {
+    if (selectedImage !== null) {
+      setSelectedImage((selectedImage + 1) % filteredImages.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImage !== null) {
+      setSelectedImage((selectedImage - 1 + filteredImages.length) % filteredImages.length);
+    }
+  };
 
   return (
-    <Section id="gallery" background="white">
-      <Container>
-        <SectionHeader
-          subtitle={t('gallery.subtitle')}
-          title={t('gallery.title')}
-        />
+    <section id="gallery" className="py-20 md:py-32 bg-background" ref={ref}>
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <span className="text-emerald-600 mb-2 inline-block">
+            {t('gallery')}
+          </span>
+          <h2 className="text-4xl md:text-5xl text-foreground mb-4">
+            Department Gallery
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Explore our state-of-the-art manufacturing facilities
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-blue-600 mx-auto rounded-full mt-4" />
+        </motion.div>
 
         {/* Category Filters */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {categories.map((category, index) => (
-            <motion.button
+          {categories.map((category) => (
+            <Button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-2.5 rounded-full transition-all ${
-                selectedCategory === category.id
-                  ? 'bg-accent text-white shadow-lg'
-                  : 'bg-secondary hover:bg-accent/10 text-foreground'
-              }`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveCategory(category.id)}
+              variant={activeCategory === category.id ? 'default' : 'outline'}
+              className={activeCategory === category.id ? 'bg-emerald-600 hover:bg-emerald-700' : ''}
             >
-              {category.label}
-            </motion.button>
+              {category.name}
+            </Button>
           ))}
         </motion.div>
 
-        {/* Masonry Gallery */}
-        <Masonry columnsCount={3} gutter="1.5rem" responsive={[
-          { breakpoint: 768, cols: 2 },
-          { breakpoint: 480, cols: 1 }
-        ]}>
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredImages.map((image, index) => (
               <motion.div
-                key={image.id}
+                key={image.url}
                 layout
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow h-80"
-                onClick={() => setLightboxImage(image)}
+                transition={{ duration: 0.4 }}
+                whileHover={{ y: -8 }}
+                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer aspect-square"
+                onClick={() => setSelectedImage(index)}
               >
-                <ImageWithFallback
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                
-                {/* Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6"
-                  whileHover={{ opacity: 1 }}
-                >
-                  <div className="text-white w-full">
-                    <p className="mb-2">{image.alt}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm bg-accent/80 px-3 py-1 rounded-full">
-                        {categories.find(c => c.id === image.category)?.label}
-                      </span>
-                      <ZoomIn className="w-6 h-6" />
-                    </div>
+                {image.type === 'video' ? (
+                  <video
+                    src={image.url}
+                    className="w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
+                  />
+                ) : (
+                  <ImageWithFallback
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-white mb-1">{image.title}</h3>
+                    <p className="text-white/80 text-sm">{image.description}</p>
+                    {image.type === 'video' && (
+                      <span className="inline-block mt-1 px-2 py-0.5 bg-emerald-600/80 rounded text-xs">Video</span>
+                    )}
                   </div>
-                </motion.div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <ZoomIn className="size-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
-        </Masonry>
+        </div>
 
         {/* Lightbox */}
         <AnimatePresence>
-          {lightboxImage && (
+          {selectedImage !== null && (
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setLightboxImage(null)}
+              className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+              onClick={() => setSelectedImage(null)}
             >
-              <motion.button
-                className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-                onClick={() => setLightboxImage(null)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+              {/* Close Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 text-white hover:bg-white/10 rounded-full"
+                onClick={() => setSelectedImage(null)}
               >
-                <X className="w-6 h-6" />
-              </motion.button>
+                <X className="size-6" />
+              </Button>
 
+              {/* Navigation Buttons */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute left-4 text-white hover:bg-white/10 rounded-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevImage();
+                }}
+              >
+                <ChevronLeft className="size-8" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 text-white hover:bg-white/10 rounded-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextImage();
+                }}
+              >
+                <ChevronRight className="size-8" />
+              </Button>
+
+              {/* Image/Video */}
               <motion.div
-                className="max-w-6xl max-h-[90vh] relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.8 }}
+                className="max-w-6xl max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
-                <ImageWithFallback
-                  src={lightboxImage.src}
-                  alt={lightboxImage.alt}
-                  className="w-full h-full object-contain rounded-lg"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                  <p className="text-white text-xl">{lightboxImage.alt}</p>
+                {filteredImages[selectedImage].type === 'video' ? (
+                  <video
+                    src={filteredImages[selectedImage].url}
+                    className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                    controls
+                    autoPlay
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <ImageWithFallback
+                    src={filteredImages[selectedImage].url}
+                    alt={filteredImages[selectedImage].title}
+                    className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                  />
+                )}
+                <div className="text-center mt-4">
+                  <h3 className="text-white text-xl mb-2">
+                    {filteredImages[selectedImage].title}
+                  </h3>
+                  <p className="text-white/70">
+                    {filteredImages[selectedImage].description}
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
-};
-
-export default Gallery;
+}
