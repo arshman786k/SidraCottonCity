@@ -127,7 +127,10 @@ const Gallery: React.FC = () => {
         </motion.div>
 
         {/* Masonry Gallery */}
-        <Masonry columnsCount={3} gutter="1rem">
+        <Masonry columnsCount={3} gutter="1.5rem" responsive={[
+          { breakpoint: 768, cols: 2 },
+          { breakpoint: 480, cols: 1 }
+        ]}>
           <AnimatePresence mode="popLayout">
             {filteredImages.map((image, index) => (
               <motion.div
@@ -137,13 +140,13 @@ const Gallery: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow"
+                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow h-80"
                 onClick={() => setLightboxImage(image)}
               >
                 <ImageWithFallback
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 
                 {/* Overlay */}

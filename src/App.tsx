@@ -2,8 +2,10 @@ import React from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Toaster } from './components/ui/sonner';
+import './config/firebase';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import Features from './components/Features';
 import About from './components/About';
 import Workflow from './components/Workflow';
 import Gallery from './components/Gallery';
@@ -24,6 +26,7 @@ export default function App() {
           <Navigation />
           <main>
             <Hero />
+            <Features />
             <About />
             <Workflow />
             <Gallery />

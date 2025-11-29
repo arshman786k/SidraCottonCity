@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-40">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           alt="Sidra Cotton City Factory Building"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-accent/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/40 to-accent/10 mt-6" />
       </div>
 
       {/* Animated Background Elements */}
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10 pt-20">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
@@ -67,45 +67,22 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
+            {/* Logo Section */}
             <motion.div
-              className="inline-block mb-4 px-4 py-2 bg-accent/20 backdrop-blur-sm rounded-full border border-accent/30"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <span className="text-sm uppercase tracking-wider">
-                Apparels Manufacturing Excellence
-              </span>
+              <img
+                src={logo}
+                alt="Sidra Cotton City Logo"
+                className="h-24 md:h-32 object-contain opacity-60"
+              />
             </motion.div>
+           
 
-            <motion.h1
-              className="mb-6 flex justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <div
-                className="w-full flex items-center justify-center"
-                style={{
-                  background: 'linear-gradient(to right, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%)',
-                  borderRadius: '1.5rem',
-                  padding: '1.5rem 0',
-                  minHeight: '4.5rem',
-                  maxWidth: '700px',
-                }}
-              >
-                <img
-                  src={logo}
-                  alt="Sidra Cotton City Logo"
-                  style={{
-                    height: '4.5rem',
-                    objectFit: 'contain',
-                    borderRadius: '1.5rem',
-                    boxShadow: '0 0 40px 0 rgba(0,0,0,0.08)',
-                  }}
-                />
-              </div>
-            </motion.h1>
+
 
             <motion.p
               className="text-lg md:text-xl mb-8 text-primary-foreground/90 max-w-xl"
@@ -168,51 +145,7 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Feature Cards */}
-          <motion.div
-            className="hidden lg:grid grid-cols-2 gap-4"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {[
-              {
-                title: 'Premium Quality',
-                desc: 'International standards',
-                delay: 0.5,
-              },
-              {
-                title: 'Modern Technology',
-                desc: 'State-of-the-art facilities',
-                delay: 0.6,
-              },
-              {
-                title: 'Global Export',
-                desc: 'Serving 25+ countries',
-                delay: 0.7,
-              },
-              {
-                title: 'Fast Delivery',
-                desc: 'On-time guaranteed',
-                delay: 0.8,
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-primary-foreground/10 backdrop-blur-md rounded-xl p-6 border border-primary-foreground/20"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: feature.delay }}
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-                  <div className="w-6 h-6 bg-accent rounded" />
-                </div>
-                <h3 className="text-lg mb-2">{feature.title}</h3>
-                <p className="text-sm text-primary-foreground/70">{feature.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+
         </div>
       </div>
 

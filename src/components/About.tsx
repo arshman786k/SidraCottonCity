@@ -4,6 +4,7 @@ import { Target, Eye, Award, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Section, Container, SectionHeader } from './Section';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import factoryImage from '../assets/images/Factory Building_1.jpg';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
@@ -55,8 +56,8 @@ const About: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB0ZWFtJTIwYnVzaW5lc3MlMjBtZWV0aW5nfGVufDF8fHx8MTc2NDMwNDI0MXww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Sidra Cotton City Team"
+                src={factoryImage}
+                alt="Sidra Cotton City Factory Building"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />

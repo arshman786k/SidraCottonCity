@@ -3,6 +3,12 @@ import { motion } from 'motion/react';
 import { Scissors, Droplet, Ruler, Zap, CheckCircle, Package } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Section, Container, SectionHeader } from './Section';
+import knittingImg from '../assets/images/Knitting.jpeg';
+import dyeingImg from '../assets/images/Dyeing.jpeg';
+import cuttingImg from '../assets/images/Cutting.jpeg';
+import stitchingImg from '../assets/images/Sttiching Unit.jpg';
+import qualityImg from '../assets/images/Quality Control.jpeg';
+import packingImg from '../assets/images/Packing.jpeg';
 
 const Workflow: React.FC = () => {
   const { t } = useLanguage();
@@ -13,36 +19,42 @@ const Workflow: React.FC = () => {
       title: t('workflow.step1.title'),
       description: t('workflow.step1.desc'),
       color: 'from-blue-500 to-blue-600',
+      image: knittingImg,
     },
     {
       icon: <Droplet className="w-8 h-8" />,
       title: t('workflow.step2.title'),
       description: t('workflow.step2.desc'),
       color: 'from-purple-500 to-purple-600',
+      image: dyeingImg,
     },
     {
       icon: <Ruler className="w-8 h-8" />,
       title: t('workflow.step3.title'),
       description: t('workflow.step3.desc'),
       color: 'from-orange-500 to-orange-600',
+      image: cuttingImg,
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: t('workflow.step4.title'),
       description: t('workflow.step4.desc'),
       color: 'from-accent to-green-600',
+      image: stitchingImg,
     },
     {
       icon: <CheckCircle className="w-8 h-8" />,
       title: t('workflow.step5.title'),
       description: t('workflow.step5.desc'),
       color: 'from-primary to-blue-700',
+      image: qualityImg,
     },
     {
       icon: <Package className="w-8 h-8" />,
       title: t('workflow.step6.title'),
       description: t('workflow.step6.desc'),
       color: 'from-red-500 to-pink-600',
+      image: packingImg,
     },
   ];
 
@@ -82,6 +94,15 @@ const Workflow: React.FC = () => {
                     className="bg-background dark:bg-card rounded-xl shadow-lg p-6 border border-border hover:shadow-xl transition-shadow group"
                     whileHover={{ scale: 1.05 }}
                   >
+                    {/* Image */}
+                    <div className="mb-4 h-48 rounded-lg overflow-hidden">
+                      <img 
+                        src={step.image} 
+                        alt={step.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    
                     <div className={`flex items-center gap-4 ${index % 2 === 0 ? 'flex-row-reverse' : 'flex-row'}`}>
                       <div className={`flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}>
                         {step.icon}
@@ -145,6 +166,15 @@ const Workflow: React.FC = () => {
                   className="bg-background dark:bg-card rounded-xl shadow-lg p-6 border border-border"
                   whileHover={{ scale: 1.02 }}
                 >
+                  {/* Image */}
+                  <div className="mb-4 h-40 rounded-lg overflow-hidden">
+                    <img 
+                      src={step.image} 
+                      alt={step.title}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+
                   <div className="flex items-center gap-4 mb-4">
                     <div className={`flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg`}>
                       {step.icon}
