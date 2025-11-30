@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
         {
-          to_email: 'sidracottoncity1@gmail.com',
+          to_email: 'info@sidracottoncity.com',
           from_email: formData.email,
           from_name: formData.name,
           phone: formData.phone,
@@ -84,8 +84,8 @@ const Contact: React.FC = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      value: 'sidracottoncity1@gmail.com',
-      link: 'mailto:sidracottoncity1@gmail.com',
+      value: 'info@sidracottoncity.com',
+      link: 'mailto:info@sidracottoncity.com',
     },
   ];
 
@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54632.12345678901!2d73.08!3d31.42!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI1JzEyLjAiTiA3M8KwMDQnNDguMCJF!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.8936712088647!2d74.38023257549234!3d31.387540474312984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919a90076e2dd27%3A0x5ebb098932ca1bd7!2s99PJ%2BXVV%2BChudhry%20Ishtiaq%20Markeet%2C%20Ghanakar%20Road%2C%20Lahore!5e0!3m2!1sen!2s!4v1732992500000!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

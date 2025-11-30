@@ -4,7 +4,7 @@ import { Target, Eye, Award, Users } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Section, Container, SectionHeader } from './Section';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import factoryImage from '../assets/images/Factory Building_1.jpg';
+import factoryImage from '../assets/images/Factory Building_2.jpg';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
@@ -32,7 +32,7 @@ const About: React.FC = () => {
     },
     {
       icon: <Users className="w-8 h-8" />,
-      title: '500+ Employees',
+      title: '195+ Employees',
       description: 'Skilled workforce',
     },
   ];
@@ -136,12 +136,13 @@ const About: React.FC = () => {
           {[
             { value: '99%', label: 'Quality Rate' },
             { value: '15+', label: 'Years in Business' },
-            { value: '10K+', label: 'Daily Production' },
+            { value: '3K+', label: 'Daily Production' },
             { value: '100%', label: 'Customer Satisfaction' },
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 rounded-xl bg-gradient-to-br from-accent/5 to-primary/5 hover:from-accent/10 hover:to-primary/10 transition-all"
+              className="text-center p-6 rounded-xl transition-all"
+              style={{ backgroundColor: '#246323' }}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -149,7 +150,7 @@ const About: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <motion.div
-                className="text-3xl md:text-4xl text-accent mb-2"
+                className="text-3xl md:text-4xl font-bold text-white mb-2"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -157,7 +158,7 @@ const About: React.FC = () => {
               >
                 {stat.value}
               </motion.div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-sm font-bold text-white">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

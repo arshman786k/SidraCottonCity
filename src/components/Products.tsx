@@ -31,10 +31,9 @@ const Products = () => {
     { id: 'tshirts', name: 'T-Shirts' },
     { id: 'polo', name: 'Polo Shirts' },
     { id: 'hoodies', name: 'Hoodies' },
-    { id: 'formal', name: 'Formal Shirts' },
-    { id: 'pants', name: 'Pants & Trousers' },
+    { id: 'pants', name: 'Trousers' },
     { id: 'jeans', name: 'Jeans' },
-    { id: 'kids', name: 'Kids Wear' },
+    { id: 'undergarments', name: 'Mens UnderGarments' },
   ];
 
  const products = [
@@ -72,20 +71,13 @@ const Products = () => {
   },
   {
     id: 5,
-    name: 'Formal Shirt',
-    category: 'formal',
+    name: 'Under Shirt',
+    category: 'undergarments',
     image: formalImg,
-    description: 'Premium Formal Cotton Shirt',
-    features: ['Professional', 'Iron-Free', 'Premium Quality'],
+    description: 'Premium Cotton Under Shirt',
+    features: ['100% Cotton', 'Iron-Free', 'Premium Quality'],
   },
-  {
-    id: 6,
-    name: 'Kids Cotton Wear',
-    category: 'kids',
-    image: kidsImg,
-    description: 'Soft & Safe Cotton for Kids',
-    features: ['Skin-Friendly', 'Colorfast', 'Comfortable'],
-  },
+
   {
     id: 7,
     name: 'Premium Jeans',
@@ -105,7 +97,7 @@ const Products = () => {
   {
     id: 9,
     name: 'Boxer Brief',
-    category: 'kids',
+    category: 'undergarments',
     image: boxerBriefImg,
     description: 'Comfortable Cotton Boxer Brief',
     features: ['Breathable', 'Soft', 'Premium Quality'],
@@ -113,7 +105,7 @@ const Products = () => {
   {
     id: 10,
     name: 'Cotton Boxer Short',
-    category: 'kids',
+    category: 'undergarments',
     image: boxerShortImg,
     description: 'Premium Cotton Boxer Short',
     features: ['Comfortable', 'Durable', 'All Sizes'],
@@ -135,9 +127,7 @@ const Products = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="text-emerald-600 mb-2 inline-block">
-            {t('products')}
-          </span>
+          
           <h2 className="text-4xl md:text-5xl text-foreground mb-4">
             {t('productsTitle')}
           </h2>
@@ -201,16 +191,16 @@ const Products = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl text-foreground mb-2">{product.name}</h3>
-                  <p className="text-muted-foreground mb-4">{product.description}</p>
+                <div className="p-6" style={{ backgroundColor: '#246323' }}>
+                  <h3 className="text-xl text-white font-bold mb-2">{product.name}</h3>
+                  <p className="text-white mb-4">{product.description}</p>
                   
                   {/* Features */}
                   <div className="flex flex-wrap gap-2">
                     {product.features.map((feature, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 rounded-full text-sm"
+                        className="px-3 py-1 bg-white/20 text-white rounded-full text-sm font-semibold"
                       >
                         {feature}
                       </span>

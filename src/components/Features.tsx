@@ -67,7 +67,8 @@ const Features: React.FC = () => {
 
         {/* Stats Section */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl p-8 border border-accent/20"
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 rounded-2xl p-8"
+          style={{ backgroundColor: '#246323' }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -75,9 +76,9 @@ const Features: React.FC = () => {
         >
           {[
             { value: '15+', label: 'Years Experience' },
-            { value: '1M+', label: 'Products Made' },
-            { value: '25+', label: 'Countries Export' },
-            { value: '500+', label: 'Team Members' },
+            { value: '100+', label: 'Products Range' },
+            { value: '5+', label: 'Countries Export' },
+            { value: '195+', label: 'Team Members' },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -87,8 +88,8 @@ const Features: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
+              <div className="text-sm text-white font-bold">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

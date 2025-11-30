@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/images/only_logo.png';
-import factoryImage from '../assets/images/Factory Building.jpg';
-import { motion } from 'motion/react';
-import { ArrowRight, Phone } from 'lucide-react';
+import factoryImg from '../assets/images/Factory Building_1.jpg';
+import cuttingImg from '../assets/images/Cutting.jpeg';
+import stitchingImg from '../assets/images/sttiching_1.jpg';
+import finishingImg from '../assets/images/finishing_1.jpg';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from './ui/button';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+
+  const slides = [
+    { id: 1, src: factoryImg, alt: 'Factory Building' },
+    { id: 2, src: cuttingImg, alt: 'Cutting Department' },
+    { id: 3, src: stitchingImg, alt: 'Stitching Department' },
+    { id: 4, src: finishingImg, alt: 'Finishing Department' },
+  ];
+
+  // Autoplay slider
+  useEffect(() => {
+    if (!autoplay) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [autoplay, slides.length]);
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setAutoplay(false);
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setAutoplay(false);
+  };
+
+  const handleDotClick = (index: number) => {
+    setCurrentSlide(index);
+    setAutoplay(false);
+  };
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
@@ -19,14 +57,42 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-40">
-      {/* Background Image with Overlay */}
+      {/* Background Slider */}
       <div className="absolute inset-0 z-0">
-        <ImageWithFallback
-          src={factoryImage}
-          alt="Sidra Cotton City Factory Building"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/40 to-accent/10 mt-6" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <ImageWithFallback
+              src={slides[currentSlide].src}
+              alt={slides[currentSlide].alt}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-accent/70" />
+      </div>
+
+  
+
+      {/* Slider Dots */}
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+        {slides.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className={`h-2 rounded-full transition-all ${
+              index === currentSlide ? 'bg-white w-8' : 'bg-white/50 w-2'
+            }`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          />
+        ))}
       </div>
 
       {/* Animated Background Elements */}
@@ -63,16 +129,18 @@ const Hero: React.FC = () => {
           {/* Left Content */}
           <motion.div
             className="text-primary-foreground"
-            initial={{ opacity: 0, x: -50 }}
+            key={currentSlide}
+            initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             {/* Logo Section */}
             <motion.div
               className="mb-6"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
               <img
                 src={logo}
@@ -80,72 +148,57 @@ const Hero: React.FC = () => {
                 className="h-24 md:h-32 object-contain opacity-60"
               />
             </motion.div>
-           
 
-
-
-            <motion.p
-              className="text-lg md:text-xl mb-8 text-primary-foreground/90 max-w-xl"
+            {/* Tagline */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-8"
             >
-              {t('hero.description')}
-            </motion.p>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                {' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-700" >
+                  Apparel Manufacturer & Exporters
+                </span>
+              </h2>
+            </motion.div>
 
+            {/* Read More Button */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 "
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Button
-                size="lg"
-                className="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white font-semibold rounded-xl px-6 py-3 flex items-center transition"
-                onClick={() => handleScroll('#products')}
+              <motion.button
+                onClick={() => handleScroll('#about')}
+                className="
+                  relative overflow-hidden isolate
+                  font-bold px-6 py-2.5 md:px-8 md:py-3 rounded-full 
+                  flex items-center gap-2 group
+                  border-none cursor-pointer
+                  h-11 md:h-12
+                  shadow-lg
+                "
+                style={{
+                  backgroundColor: '#246323',
+                  color: '#ffffff',
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: '#ffffff',
+                  color: '#246323',
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                {t('hero.cta.primary')}
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border border-white text-white hover:bg-white/10 hover:text-white font-semibold rounded-xl px-6 py-3 flex items-center transition"
-                onClick={() => handleScroll('#contact')}
-              >
-                <Phone className="mr-2 w-4 h-4" />
-                {t('hero.cta.secondary')}
-              </Button>
+                <span className="relative z-10">Read More</span>
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+              </motion.button>
             </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-12 border-t border-primary-foreground/20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-            >
-              {[
-                { value: '15+', label: t('stats.experience') },
-                { value: '1M+', label: t('stats.products') },
-                { value: '25+', label: t('stats.countries') },
-                { value: '500+', label: t('stats.employees') },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="text-center"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                >
-                  <div className="text-2xl md:text-3xl mb-1">{stat.value}</div>
-                  <div className="text-sm text-primary-foreground/70">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
-
-
         </div>
       </div>
 

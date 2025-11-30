@@ -12,9 +12,9 @@ import dyeingImg from '../assets/images/Dyeing.jpeg';
 import cuttingImg from '../assets/images/Cutting.jpeg';
 import stitchingImg from '../assets/images/Sttiching Unit.jpg';
 import qualityImg from '../assets/images/Quality Control.jpeg';
-import packingImg from '../assets/images/Packing.jpeg';
+import packingImg from '../assets/images/Packing_1.jpg';
 import factoryImg from '../assets/images/Factory Building.jpg';
-import factoryImg1 from '../assets/images/Factory Building_1.jpg';
+import factoryImg1 from '../assets/images/trimming.jpg';
 
 export function Gallery() {
   const { t } = useLanguage();
@@ -79,6 +79,13 @@ export function Gallery() {
       description: 'Professional packaging facility',
       type: 'image',
     },
+       {
+      url: factoryImg1,
+      category: 'factory',
+      title: 'Material Selection',
+      description: 'Premium quality material selection',
+      type: 'image',
+    },
     {
       url: factoryImg,
       category: 'factory',
@@ -86,13 +93,7 @@ export function Gallery() {
       description: 'Our modern manufacturing facility',
       type: 'image',
     },
-    {
-      url: factoryImg1,
-      category: 'factory',
-      title: 'Material Selection',
-      description: 'Premium quality material selection',
-      type: 'image',
-    },
+ 
   ];
 
   const filteredImages = activeCategory === 'all' 
@@ -121,9 +122,7 @@ export function Gallery() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="text-emerald-600 mb-2 inline-block">
-            {t('gallery')}
-          </span>
+          
           <h2 className="text-4xl md:text-5xl text-foreground mb-4">
             Department Gallery
           </h2>

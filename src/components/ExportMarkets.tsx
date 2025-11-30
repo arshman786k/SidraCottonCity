@@ -10,30 +10,30 @@ const ExportMarkets: React.FC = () => {
   const regions = [
     {
       name: 'North America',
-      countries: ['USA', 'Canada', 'Mexico'],
+      countries: ['USA'],
       icon: '🇺🇸',
-      percentage: 35,
+      percentage: 5,
       color: 'from-blue-500 to-blue-600',
     },
     {
       name: 'Europe',
-      countries: ['UK', 'Germany', 'France', 'Italy', 'Spain'],
+      countries: ['Germany', 'UK'],
       icon: '🇪🇺',
-      percentage: 30,
+      percentage: 75,
       color: 'from-purple-500 to-purple-600',
     },
     {
       name: 'Middle East',
-      countries: ['UAE', 'Saudi Arabia', 'Qatar', 'Kuwait'],
+      countries: ['Saudi Arabia'],
       icon: '🇦🇪',
-      percentage: 20,
+      percentage: 10,
       color: 'from-accent to-green-600',
     },
     {
       name: 'Asia Pacific',
-      countries: ['Australia', 'Japan', 'South Korea'],
+      countries: ['Malysia'],
       icon: '🇦🇺',
-      percentage: 15,
+      percentage: 10,
       color: 'from-orange-500 to-red-600',
     },
   ];
@@ -41,7 +41,7 @@ const ExportMarkets: React.FC = () => {
   const stats = [
     {
       icon: <Globe2 className="w-6 h-6" />,
-      value: '25+',
+      value: '5+',
       label: 'Countries',
       color: 'bg-blue-500',
     },
@@ -53,13 +53,13 @@ const ExportMarkets: React.FC = () => {
     },
     {
       icon: <Users className="w-6 h-6" />,
-      value: '150+',
+      value: '15+',
       label: 'Global Clients',
       color: 'bg-purple-500',
     },
     {
       icon: <Package className="w-6 h-6" />,
-      value: '500K+',
+      value: '2M+',
       label: 'Units Shipped',
       color: 'bg-orange-500',
     },

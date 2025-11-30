@@ -72,8 +72,8 @@ const WhyChooseUs: React.FC = () => {
   const achievements = [
     { value: 99, suffix: '%', label: 'Quality Rate', duration: 2 },
     { value: 15, suffix: '+', label: 'Years Experience', duration: 1.5 },
-    { value: 500, suffix: '+', label: 'Employees', duration: 2.5 },
-    { value: 10000, suffix: '+', label: 'Daily Capacity', duration: 3 },
+    { value: 195, suffix: '+', label: 'Employees', duration: 2.5 },
+    { value: 5000, suffix: '+', label: 'Daily Capacity', duration: 3 },
   ];
 
   return (
@@ -96,7 +96,8 @@ const WhyChooseUs: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <motion.div
-                className="h-full bg-background dark:bg-card rounded-2xl p-8 border border-border hover:border-accent/50 transition-all shadow-lg hover:shadow-2xl"
+                className="h-full rounded-2xl p-8 border border-border hover:border-accent/50 transition-all shadow-lg hover:shadow-2xl"
+                style={{ backgroundColor: '#246323' }}
                 whileHover={{ y: -10, scale: 1.02 }}
               >
                 {/* Icon */}
@@ -109,17 +110,17 @@ const WhyChooseUs: React.FC = () => {
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-xl mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-xl mb-3 text-white font-bold group-hover:text-white/90 transition-colors">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-white leading-relaxed">
                   {feature.description}
                 </p>
 
                 {/* Decorative Element */}
-                <div className="mt-6 h-1 w-12 bg-gradient-to-r from-accent to-transparent rounded-full group-hover:w-24 transition-all" />
+                <div className="mt-6 h-1 w-12 bg-gradient-to-r from-white to-transparent rounded-full group-hover:w-24 transition-all" />
               </motion.div>
             </motion.div>
           ))}

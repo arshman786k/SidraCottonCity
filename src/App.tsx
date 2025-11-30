@@ -16,6 +16,7 @@ const Gallery = lazy(() => import('./components/Gallery').then(m => ({ default: 
 const Products = lazy(() => import('./components/Products'));
 const ExportMarkets = lazy(() => import('./components/ExportMarkets'));
 const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'));
+const Clients = lazy(() => import('./components/Clients'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
@@ -41,6 +42,7 @@ export default function App() {
             <LazySection><Products /></LazySection>
             <LazySection><ExportMarkets /></LazySection>
             <LazySection><WhyChooseUs /></LazySection>
+            <LazySection><Clients /></LazySection>
             <LazySection><Testimonials /></LazySection>
             <LazySection><Contact /></LazySection>
             <LazySection><Footer /></LazySection>
