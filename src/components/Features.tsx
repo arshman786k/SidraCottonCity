@@ -21,7 +21,7 @@ const Features: React.FC = () => {
     },
     {
       title: 'Global Export',
-      desc: 'Serving 25+ countries',
+      desc: 'Serving 5+ countries',
       color: 'from-orange-500 to-orange-600',
       icon: '🌍',
     },

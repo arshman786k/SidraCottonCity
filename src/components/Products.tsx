@@ -17,6 +17,11 @@ import sweatImg from '../assets/images/Sweat shirt.jpeg';
 import boxerBriefImg from '../assets/images/Boxer Brief.jpeg';
 import boxerShortImg from '../assets/images/Cotton Boxer Short.jpeg';
 import sandoVestImg from '../assets/images/Jeans.jpeg';
+import gymwear1Img from '../assets/images/gymwear1.png';
+import gymwear2Img from '../assets/images/gymwear2.png';
+import gymwear3Img from '../assets/images/gymwear3.png';
+import gymwear4Img from '../assets/images/gymwear4.png';
+import gymwear5Img from '../assets/images/gymwear5.png';
 
 const Products = () => {
   const { t } = useLanguage();
@@ -34,6 +39,7 @@ const Products = () => {
     { id: 'pants', name: 'Trousers' },
     { id: 'jeans', name: 'Jeans' },
     { id: 'undergarments', name: 'Mens UnderGarments' },
+    { id: 'gymwear', name: 'Gymwear' },
   ];
 
  const products = [
@@ -109,6 +115,46 @@ const Products = () => {
     image: boxerShortImg,
     description: 'Premium Cotton Boxer Short',
     features: ['Comfortable', 'Durable', 'All Sizes'],
+  },
+  {
+    id: 11,
+    name: 'Men\'s Performance Training T-Shirt',
+    category: 'gymwear',
+    image: gymwear1Img,
+    description: 'Lightweight, quick-dry training t-shirt for intense workouts.',
+    features: ['Moisture-wicking fabric', '4-way stretch for full mobility', 'Breathable knit for airflow'],
+  },
+  {
+    id: 12,
+    name: 'Men\'s Lightweight Workout Shorts',
+    category: 'gymwear',
+    image: gymwear3Img,
+    description: 'Versatile lightweight shorts built for comfort and movement.',
+    features: ['Quick-drying material', 'Elastic waistband with drawstring', 'Side pockets for essentials'],
+  },
+  {
+    id: 13,
+    name: 'Women\'s Impact Sports Bra',
+    category: 'gymwear',
+    image: gymwear2Img,
+    description: 'Supportive sports bra for medium to high-intensity training.',
+    features: ['Compressive support fit', 'Sweat-wicking soft fabric', 'Racerback for free shoulder movement'],
+  },
+  {
+    id: 14,
+    name: 'Women\'s High-Waist Training Leggings',
+    category: 'gymwear',
+    image: gymwear4Img,
+    description: 'High-waist leggings for coverage, comfort, and flexibility.',
+    features: ['Supportive high-rise waistband', 'Stretch fabric for flexibility', 'Ventilated mesh-style panels'],
+  },
+  {
+    id: 15,
+    name: 'Women\'s Performance Gym Shorts',
+    category: 'gymwear',
+    image: gymwear5Img,
+    description: 'Lightweight performance shorts for running and gym sessions.',
+    features: ['Fast-drying fabric', 'Relaxed fit with curved hem', 'Soft inner lining for comfort'],
   },
 
 ];

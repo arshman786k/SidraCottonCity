@@ -151,7 +151,7 @@ const Footer: React.FC = () => {
                   href="mailto:info@sidracottoncity.com"
                   className="text-primary-foreground/80 hover:text-accent transition-colors"
                 >
-                  sidracottoncity1@gmail.com
+                  info@sidracottoncity.com
                 </a>
               </li>
             </ul>
