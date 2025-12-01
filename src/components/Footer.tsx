@@ -25,10 +25,10 @@ const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { icon: <Facebook className="w-5 h-5" />, href: '#', name: 'Facebook' },
-    { icon: <Twitter className="w-5 h-5" />, href: '#', name: 'Twitter' },
-    { icon: <Instagram className="w-5 h-5" />, href: '#', name: 'Instagram' },
-    { icon: <Linkedin className="w-5 h-5" />, href: '#', name: 'LinkedIn' },
+    { icon: <Facebook className="w-5 h-5" />, href: 'https://www.facebook.com/share/15XXR22qovS/', name: 'Facebook' },
+    { icon: <Twitter className="w-5 h-5" />, href: 'https://x.com/babarmayo640?t=7bPxjpcNBkRhEpuAQz1oRQ&s=09', name: 'Twitter' },
+    { icon: <Instagram className="w-5 h-5" />, href: 'https://www.instagram.com/farzand.alibaber.3?utm_source=qr&igsh=MW4ydzk2bWc1Y3Zscw==', name: 'Instagram' },
+    { icon: <Linkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/farzand-alibaber-7b7b2b361?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', name: 'LinkedIn' },
   ];
 
   return (

@@ -132,14 +132,7 @@ const Products = () => {
     description: 'Versatile lightweight shorts built for comfort and movement.',
     features: ['Quick-drying material', 'Elastic waistband with drawstring', 'Side pockets for essentials'],
   },
-  {
-    id: 13,
-    name: 'Women\'s Impact Sports Bra',
-    category: 'gymwear',
-    image: gymwear2Img,
-    description: 'Supportive sports bra for medium to high-intensity training.',
-    features: ['Compressive support fit', 'Sweat-wicking soft fabric', 'Racerback for free shoulder movement'],
-  },
+
   {
     id: 14,
     name: 'Women\'s High-Waist Training Leggings',

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Globe2, TrendingUp, Users, Package } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Section, Container, SectionHeader } from './Section';
+import WorldMapExports from './WorldMapExports';
 
 const ExportMarkets: React.FC = () => {
   const { t } = useLanguage();
@@ -103,9 +104,9 @@ const ExportMarkets: React.FC = () => {
           ))}
         </div>
 
-        {/* World Map Visualization (Simple Grid) */}
+        {/* World Map Visualization */}
         <motion.div
-          className="mb-12 p-8 rounded-2xl bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10"
+          className="mb-12"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -117,35 +118,7 @@ const ExportMarkets: React.FC = () => {
             <p className="text-primary-foreground/70">Exporting quality products worldwide</p>
           </div>
 
-          {/* Animated Globe Dots */}
-          <div className="relative h-64 flex items-center justify-center">
-            <motion.div
-              className="absolute w-64 h-64 border-2 border-accent/30 rounded-full"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-3 h-3 bg-accent rounded-full"
-                  style={{
-                    top: '50%',
-                    left: '50%',
-                    transform: `rotate(${i * 30}deg) translateY(-128px)`,
-                  }}
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.1,
-                  }}
-                />
-              ))}
-            </motion.div>
-          </div>
+          <WorldMapExports />
         </motion.div>
 
         {/* Regional Breakdown */}
