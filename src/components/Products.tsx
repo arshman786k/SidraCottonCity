@@ -22,6 +22,7 @@ import gymwear2Img from '../assets/images/gymwear2.png';
 import gymwear3Img from '../assets/images/gymwear3.png';
 import gymwear4Img from '../assets/images/gymwear4.png';
 import gymwear5Img from '../assets/images/gymwear5.png';
+import gymwear6Img from '../assets/images/gymwear6.png';
 
 const Products = () => {
   const { t } = useLanguage();
@@ -149,6 +150,18 @@ const Products = () => {
     description: 'Lightweight performance shorts for running and gym sessions.',
     features: ['Fast-drying fabric', 'Relaxed fit with curved hem', 'Soft inner lining for comfort'],
   },
+{
+  id: 16,
+  name: 'Premium Sleeveless Muscle Hoodie',
+  category: 'gymwear',
+  image: gymwear6Img,
+  description: 'Lightweight sleeveless hoodie designed for maximum mobility and style.',
+  features: [
+    'Breathable cotton-blend fabric for comfort',
+    'Sleeveless cut for unrestricted movement',
+    'Adjustable hood and front pocket detail',
+  ],
+}
 
 ];
 
